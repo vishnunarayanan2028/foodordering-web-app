@@ -1,0 +1,13 @@
+/* admin.css */
+/* Inherits mostly from dashboard.css, adding specific overrides if needed */
+.admin-header {
+    background: var(--white-bg);
+    padding: 20px;
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--card-shadow);
+    margin-bottom: 30px;
+}
+.action-btn {
+    padding: 5px 10px;
+    font-size: 0.875rem;
+}

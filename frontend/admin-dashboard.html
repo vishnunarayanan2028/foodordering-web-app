@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Food Munch</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4b6aa4f9ba.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">Food Munch Admin</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active"><a class="nav-link" href="/admin-dashboard.html">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/admin-users.html">Users</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/admin-orders.html">Orders</a></li>
+                </ul>
+                <ul class="navbar-nav align-items-center" id="authNav"></ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="margin-top: 100px; min-height: 60vh;" id="adminDashboardStats">
+        <h2 class="mb-4">System Overview</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="stat-card bg-gradient-primary">
+                    <div>
+                        <h3><span id="totalUsers">0</span></h3>
+                        <p>Total Users</p>
+                    </div>
+                    <i class="fas fa-users stat-icon"></i>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card bg-gradient-success">
+                    <div>
+                        <h3><span id="totalOrders">0</span></h3>
+                        <p>Total Orders</p>
+                    </div>
+                    <i class="fas fa-shopping-bag stat-icon"></i>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card bg-gradient-warning">
+                    <div>
+                        <h3><span id="totalRevenue">₹0</span></h3>
+                        <p>Total Revenue</p>
+                    </div>
+                    <i class="fas fa-rupee-sign stat-icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/admin.js"></script>
+</body>
+</html>

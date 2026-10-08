@@ -1,0 +1,45 @@
+/* dashboard.css */
+.stat-card {
+    padding: 25px;
+    border-radius: var(--card-border-radius);
+    color: white;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.stat-card h3 {
+    color: white;
+    font-size: 2rem;
+    margin: 0;
+}
+.stat-card p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+.stat-icon {
+    font-size: 3rem;
+    opacity: 0.8;
+}
+.bg-gradient-primary { background: linear-gradient(135deg, #1e3c72, #2a5298); }
+.bg-gradient-success { background: linear-gradient(135deg, #11998e, #38ef7d); }
+.bg-gradient-warning { background: linear-gradient(135deg, #f2994a, #f2c94c); }
+.bg-gradient-danger { background: linear-gradient(135deg, #eb3349, #f45c43); }
+
+.table-custom {
+    background: white;
+    border-radius: var(--card-border-radius);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+}
+.table-custom th {
+    background: var(--light-section-bg);
+    border-top: none;
+    color: var(--heading-color);
+    font-weight: 600;
+}
+.table-custom td {
+    vertical-align: middle;
+}

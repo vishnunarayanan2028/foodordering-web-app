@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - Food Munch</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4b6aa4f9ba.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="/images/food-munch-img.svg" alt="Food Munch Logo" height="40">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/menu.html">Menu</a></li>
+                </ul>
+                <ul class="navbar-nav align-items-center" id="authNav"></ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container text-center" style="margin-top: 120px; min-height: 50vh;">
+        <i class="fas fa-check-circle text-success mb-4" style="font-size: 5rem;"></i>
+        <h2 class="mb-2 font-weight-bold">Order Placed Successfully!</h2>
+        <p class="text-muted mb-4" style="font-size: 1.1rem;">Thank you for ordering with Food Munch.</p>
+        
+        <div class="d-inline-block text-left mb-4 p-4 custom-card shadow-sm" style="min-width: 360px; max-width: 450px; border-radius: 16px;">
+            <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                <span class="font-weight-bold text-muted">Order ID:</span>
+                <span class="font-weight-bold text-dark h5 mb-0" id="orderIdText">#ORD-00000</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="text-muted">Restaurant:</span>
+                <span class="font-weight-bold" id="restaurantText">Food Munch</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="text-muted">Total Amount:</span>
+                <span class="font-weight-bold text-success h6 mb-0" id="totalText">₹0</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="text-muted">Payment Method:</span>
+                <span class="badge badge-info px-2 py-1" id="paymentMethodText">Cash on Delivery</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="text-muted">Payment Status:</span>
+                <span class="badge badge-warning px-2 py-1" id="paymentStatusText">PENDING</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top">
+                <span class="text-muted">Order Status:</span>
+                <span class="badge badge-success px-3 py-1" id="orderStatusText">PLACED</span>
+            </div>
+        </div>
+        
+        <div>
+            <a href="#" id="trackOrderBtn" class="custom-button mr-2"><i class="fas fa-map-marker-alt mr-1"></i> Track Order</a>
+            <a href="/menu.html" class="custom-outline-button"><i class="fas fa-utensils mr-1"></i> Order More</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="/js/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderId = urlParams.get('id');
+            if (orderId) {
+                document.getElementById('orderIdText').textContent = `#ORD-${orderId.toString().padStart(5, '0')}`;
+                document.getElementById('trackOrderBtn').href = `/order-detail.html?id=${orderId}`;
+                
+                try {
+                    const order = await ApiClient.get(`/orders/${orderId}`);
+                    if (order) {
+                        if (order.restaurant_name) document.getElementById('restaurantText').textContent = order.restaurant_name;
+                        if (order.total_amount) document.getElementById('totalText').textContent = `₹${parseFloat(order.total_amount).toFixed(2)}`;
+                        if (order.payment_method) {
+                            const pMethod = order.payment_method.toUpperCase();
+                            document.getElementById('paymentMethodText').textContent = pMethod === 'DEMO_PAYMENT' ? 'Demo Instant Payment' : (pMethod === 'COD' ? 'Cash on Delivery' : pMethod);
+                        }
+                        if (order.payment_status) {
+                            const pStatus = document.getElementById('paymentStatusText');
+                            pStatus.textContent = order.payment_status.toUpperCase();
+                            pStatus.className = order.payment_status === 'paid' ? 'badge badge-success px-2 py-1' : 'badge badge-warning px-2 py-1';
+                        }
+                        if (order.status || order.order_status) {
+                            const oStatus = order.status || order.order_status;
+                            document.getElementById('orderStatusText').textContent = oStatus.toUpperCase();
+                        }
+                    }
+                } catch (e) {
+                    console.error("Failed to load order confirmation details", e);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

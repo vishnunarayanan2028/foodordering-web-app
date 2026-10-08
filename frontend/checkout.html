@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Food Munch</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4b6aa4f9ba.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="/images/food-munch-img.svg" alt="Food Munch Logo" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/menu.html">Menu</a></li>
+                </ul>
+                <ul class="navbar-nav align-items-center" id="authNav"></ul>
+                <a href="/cart.html" class="nav-link position-relative" id="cartNav" style="display:none; color: var(--heading-color);">
+                    <i class="fas fa-shopping-cart fa-lg"></i>
+                    <span class="cart-badge" id="cartBadgeCount">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="margin-top: 100px; min-height: 60vh;">
+        <h2 class="mb-4">Checkout</h2>
+        <div class="row">
+            <div class="col-lg-7 mb-4">
+                <div class="custom-card p-4">
+                    <h4 class="mb-3">Delivery Details</h4>
+                    <form id="checkoutForm">
+                        <div class="form-group">
+                            <label>Delivery Address</label>
+                            <textarea class="form-control" id="deliveryAddress" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Contact Phone</label>
+                            <input type="tel" class="form-control" id="contactPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Order Notes (Optional)</label>
+                            <textarea class="form-control" id="orderNotes" rows="2"></textarea>
+                        </div>
+                        
+                        <h4 class="mt-4 mb-3">Payment Method</h4>
+                        <div class="custom-control custom-radio mb-3">
+                            <input type="radio" id="paymentCOD" name="paymentMethod" class="custom-control-input" value="COD" checked>
+                            <label class="custom-control-label font-weight-bold" for="paymentCOD"><i class="fas fa-money-bill-wave text-success mr-2"></i>Cash on Delivery (COD)</label>
+                        </div>
+                        <div class="custom-control custom-radio mb-3">
+                            <input type="radio" id="paymentDemo" name="paymentMethod" class="custom-control-input" value="demo_payment">
+                            <label class="custom-control-label font-weight-bold" for="paymentDemo"><i class="fas fa-credit-card text-primary mr-2"></i>Demo Instant Payment (Card / UPI / NetBanking)</label>
+                        </div>
+
+                        
+                        <button type="submit" class="custom-button btn-block mt-4" id="placeOrderBtn">Place Order</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="custom-card p-4">
+                    <h4 class="mb-3">Order Summary</h4>
+                    <div id="checkoutItems"></div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal</span>
+                        <span id="checkoutSubtotal">₹0</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Tax</span>
+                        <span id="checkoutTax">₹0</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Delivery</span>
+                        <span id="checkoutDelivery">₹40</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-3 pt-3 border-top">
+                        <strong style="font-size: 1.25rem;">Total</strong>
+                        <strong id="checkoutTotal" class="text-primary-custom" style="font-size: 1.25rem;">₹0</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer text-center">
+        <div class="container">
+            <p>&copy; 2024 Food Munch. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/checkout.js"></script>
+</body>
+</html>
